@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Slideshow</title>
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<!-- Add the slides -->
+	<div class="slideshow">
+		<div class="slideshow__slides">
+			<figure class="slideshow__slide slideshow__ slide--visible">
+				<img class="slideshow__img" src="assets/wolves-1341881_1280.jpg" alt="winter" srcset="">
+           <figcaption class="slideshow__caption">Winter</figcaption>
+			</figure>
+
+			<figure class="slideshow__slide">
+				<img class="slideshow__img" src="assets/road-1072823_1280.jpg" alt="atumn" srcset="">
+           <figcaption class="slideshow__caption">Fall</figcaption>
+			</figure>
+
+			<figure class="slideshow__slide">
+				<img class="slideshow__img" src="assets/butterflies-1127666_1280.jpg" alt="spring" srcset="">
+           <figcaption class="slideshow__caption">Spring</figcaption>
+			</figure>
+		
+			<figure class="slideshow__slide">
+				<img class="slideshow__img" src="assets/polynesia-3021072_1280.jpg" alt="summer" srcset="">
+           <figcaption class="slideshow__caption">Summer</figcaption>
+			</figure>
+		</div>
+	
+		<!-- Add the control buttons -->
+	<div class="slideshow__controls">
+		<button class="slideshow__control-button" data-direction="previous"><</button>
+		<button class="slideshow__control-button" data-direction="next">></button>
+	</div>
+	
+	<!-- Add the dots for navigaton thru the images -->
+	<div class="slideshow__dots">
+		<button class="slideshow__dot" data-index="0"></button>
+		<button class="slideshow__dot" data-index="1"></button>
+		<button class="slideshow__dot" data-index="2"></button>
+		<button class="slideshow__dot" data-index="3"></button>
+	
+	</div>
+   
+	<!-- Add a counter -->
+	<div class="slideshow__counter">
+		1/4
+	</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
