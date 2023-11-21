@@ -1,74 +1,73 @@
 
-
-const slideshows = document.querySelectorAll(".slideshow");
-
-slideshows.forEach(slideshow => {
-	const slides = slideshow.querySelectorAll(".slideshow__slide");
-	const controls = slideshow.querySelectorAll(".slideshow__control-button");
-	const dots = slideshow.querySelectorAll(".slideshow__dot");
-	const counter = slideshow.querySelector(".slideshow__counter");
-
-	let index = 0;
-
+ document.addEventListener('DOMContentLoaded', function () {
+	const slides = document.querySelectorAll('.slideshow__slide');
 	const totalSlides = slides.length;
-	const lastIndex = slides.length - 1;
-
-	const setIndex = (newIndex) => {
-		index = newIndex;
+	let currentSlide = 0;
+ 
+	const updateSlide = () => {
+	  slides.forEach((slide, index) => {
+		 if (index === currentSlide) {
+			slide.classList.add('slideshow__slide--visible');
+		 } else {
+			slide.classList.remove('slideshow__slide--visible');
+		 }
+	  });
 	};
-
-	const decreaseIndex = () => {
-		if (index > 0) {
-			index = index - 1;
-		} else {
-			index = lastIndex;
-		}
+ 
+	const updateCounter = () => {
+	  const counter = document.querySelector('.slideshow__counter');
+	  counter.textContent = `${currentSlide + 1}/${totalSlides}`;
 	};
-
-	const increaseIndex = () => {
-		if (index < lastIndex) {
-			index = index + 1;
-		} else {
-			index = 0;
-		}
+ 
+	const updateDots = () => {
+	  const dots = document.querySelectorAll('.slideshow__dot');
+	  dots.forEach((dot, index) => {
+		 if (index === currentSlide) {
+			dot.classList.add('active');
+		 } else {
+			dot.classList.remove('active');
+		 }
+	  });
 	};
-
-	const renderSlideClass = () => {
-		slides.forEach(slide => {
-			slide.classList.remove("slideshow__slide--visible");
-		});
-
-		slides[index].classList.add("slideshow__slide--visible");
-	}
-
-	const renderCounter = () => {
-		counter.textContent = `${index + 1} of ${totalSlides}`;
-	}
-
-	const changeSlide = (event) => {
-		const button = event.currentTarget;
-
-		if (button.dataset.direction === "previous") {
-			decreaseIndex();
-		}
-
-		if (button.dataset.direction === "next") {
-			increaseIndex();
-		}
-
-		if (button.dataset.index) {
-			setIndex(parseInt(button.dataset.index));
-		}
-
-		renderSlideClass();
-		renderCounter();
-	}
-
-	controls.forEach(button => {
-		button.addEventListener("click", changeSlide);
+ 
+	const nextSlide = () => {
+	  currentSlide = (currentSlide + 1) % totalSlides;
+	  updateSlide();
+	  updateCounter();
+	  updateDots();
+	};
+ 
+	const prevSlide = () => {
+	  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+	  updateSlide();
+	  updateCounter();
+	  updateDots();
+	};
+ 
+	const setSlide = (index) => {
+	  currentSlide = index;
+	  updateSlide();
+	  updateCounter();
+	  updateDots();
+	};
+ 
+	const controlButtons = document.querySelectorAll('.slideshow__control-button');
+	controlButtons.forEach((button) => {
+	  button.addEventListener('click', (e) => {
+		 const direction = e.currentTarget.dataset.direction;
+		 direction === 'next' ? nextSlide() : prevSlide();
+	  });
 	});
-
-	dots.forEach(button => {
-		button.addEventListener("click", changeSlide);
+ 
+	const dots = document.querySelectorAll('.slideshow__dot');
+	dots.forEach((dot, index) => {
+	  dot.addEventListener('click', () => {
+		 setSlide(index);
+	  });
 	});
-})
+ 
+	// Initial setup
+	updateSlide();
+	updateCounter();
+	updateDots();
+ });
