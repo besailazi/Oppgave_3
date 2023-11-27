@@ -66,7 +66,6 @@
 	  });
 	});
  
-	// Initial setup
 	updateSlide();
 	updateCounter();
 	updateDots();
